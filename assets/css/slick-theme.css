@@ -26,8 +26,8 @@
     position: absolute;
     top: 50%;
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     padding: 0;
     -webkit-transform: translate(0, -50%);
     -ms-transform: translate(0, -50%);
@@ -129,9 +129,9 @@
 {
     position: relative;
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin: 0 5px;
+    width: 10px;
+    height: 10px;
+    margin: 0 2px;
     padding: 0;
     cursor: pointer;
 }
@@ -140,8 +140,8 @@
     font-size: 0;
     line-height: 0;
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     padding: 5px;
     cursor: pointer;
     color: transparent;
@@ -163,12 +163,12 @@
 {
     font-family: 'slick';
     font-size: 6px;
-    line-height: 20px;
+    line-height: 10px;
     position: absolute;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     content: '•';
     text-align: center;
     opacity: .25;
