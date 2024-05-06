@@ -9,6 +9,13 @@ body, ul, li, p, a, label, input, div {
   font-size: 48px !important;
   font-weight: 200 !important;
 }
+
+@media (max-width: 750px) {
+  .h1{
+    font-size: 35px !important;
+  }
+}
+
 .h2 {
   font-family: 'Roboto', sans-serif;
   font-size: 30px !important;
@@ -24,9 +31,9 @@ body, ul, li, p, a, label, input, div {
 .text-muted { color: #bcbcbc !important;}
 .text-success { color: #59ab6e !important;}
 .text-light { color: #cfd6e1 !important;}
-.bg-dark { background-color: #212934 !important;}
+.bg-dark { background-color: #212529 !important;}
 .bg-light { background-color: #e9eef5 !important;}
-.bg-black { background-color: #1d242d !important;}
+.bg-black { background-color: #000 !important;}
 .bg-success { background-color: #59ab6e !important;}
 .btn-success {
   background-color: #59ab6e !important;
