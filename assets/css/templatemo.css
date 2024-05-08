@@ -1,7 +1,6 @@
 /* Typography */
 body, ul, li, p, a, label, input, div {
   font-family: 'Roboto', sans-serif;
-  font-size: 18px !important;
   font-weight: 300 !important;
 }
 .h1 {
@@ -188,10 +187,7 @@ body, ul, li, p, a, label, input, div {
 }
 
 /* */
-.d-s{
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px inset, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-}
-
-.info-s{
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-}
+.d-s{ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px inset, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; }
+.info-s{ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px; }
+.c-green{ color: #198754 !important; }
+.c-white{ color: aliceblue !important; }
