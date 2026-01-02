@@ -121,7 +121,7 @@
         <div class="map-container">
             <!-- Google Maps Embed with API Key - İşletme adı ile arama yaparak yorum ve yıldız gösterir -->
             <iframe id="google-map"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=UYGUN+Makina+İzmit+Sanayi+Sitesi&zoom=16&language=tr"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=UYGUN+Makina+İzmit+Sanayi+Sitesi&zoom=15&language=tr"
                 style="border:0; width: 100%; height: 500px;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
@@ -143,9 +143,15 @@
             height: 500px;
         }
 
+        @media (max-width: 768px) {
+            #google-map {
+                height: 450px !important;
+            }
+        }
+
         @media (max-width: 576px) {
             #google-map {
-                height: 350px !important;
+                height: 400px !important;
             }
         }
     </style>
