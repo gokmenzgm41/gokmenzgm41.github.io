@@ -1,0 +1,9 @@
+# Robots.txt for Uygun Makina
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://uygunmakina.com/sitemap.xml
+
+# Disallow admin or private areas (if any)
+Disallow: /assets/js/

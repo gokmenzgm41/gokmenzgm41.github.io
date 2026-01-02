@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="tr">
+<!-- 
+    ************************************************
+    Designed By : Derya Acar
+    Github : https://github.com/deryaxacar
+    Web : https://deryacar.com
+    ************************************************
+-->
+
+<head>
+    <title>Uygun Makina - Ürünler</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.png">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
+
+    <style>
+        /* Sidebar Styling */
+        .sidebar-card {
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 100px;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-item {
+            margin-bottom: 8px;
+        }
+
+        .category-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            border-radius: 12px;
+            color: #4a4a4a;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            background: transparent;
+        }
+
+        .category-link:hover,
+        .category-link.active {
+            background: rgba(40, 167, 69, 0.08);
+            color: #28a745;
+            padding-left: 22px;
+        }
+
+        .category-link i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .category-link:not(.collapsed) i {
+            transform: rotate(180deg);
+        }
+
+        .sub-category-list {
+            padding-left: 15px;
+            margin-top: 5px;
+        }
+
+        .sub-category-link {
+            display: block;
+            padding: 8px 18px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sub-category-link:hover {
+            color: #28a745;
+            padding-left: 22px;
+        }
+
+        .sub-category-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 4px;
+            height: 4px;
+            background: #dee2e6;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+        }
+
+        .sub-category-link:hover::before {
+            background: #28a745;
+            width: 8px;
+            border-radius: 4px;
+        }
+
+        /* Product Card Styling */
+        .premium-product-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid #f0f0f0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 100%;
+            margin-bottom: 30px;
+        }
+
+        .premium-product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: rgba(40, 167, 69, 0.2);
+        }
+
+        .product-img-container {
+            position: relative;
+            padding: 0;
+            background: #fcfcfc;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 280px;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.6s ease;
+        }
+
+        .premium-product-card:hover .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.6s ease;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .product-cat {
+            font-size: 0.8rem;
+            color: #adb5bd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 20px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .product-title:hover {
+            color: #28a745;
+        }
+
+        .btn-premium {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-premium:hover {
+            background: #218838;
+            color: white;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Sorting Bar */
+        .shop-toolbar {
+            background: #fff;
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .shop-toolbar:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .toolbar-left span {
+            font-size: 0.95rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .toolbar-right select {
+            border: 1px solid #e0e0e0;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #444;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f9f9f9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 15px center;
+            appearance: none;
+            padding-right: 40px;
+        }
+
+        .toolbar-right select:focus {
+            border-color: #28a745;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.1);
+        }
+
+        .pagination .page-link {
+            border-radius: 12px !important;
+            margin: 0 6px;
+            border: 1px solid #f0f0f0;
+            color: #4a4a4a;
+            padding: 12px 20px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fff;
+            font-size: 0.95rem;
+        }
+
+        .pagination .page-item.active .page-link {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+            border: none !important;
+            color: #fff !important;
+            box-shadow: 0 8px 15px rgba(40, 167, 69, 0.25);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 991px) {
+            .sidebar-card {
+                position: static;
+                margin-bottom: 40px;
+            }
+
+            .shop-toolbar {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .toolbar-right select {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Start Top Nav -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-envelope mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none"
+                        href="mailto: Kocaelimakinasanayi@gmail.com">Kocaelimakinasanayi@gmail.com</a>
+                    <i class="fa fa-phone mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:+90(530)9966641">+90 (530) 996
+                        66 41</a>
+                </div>
+                <div>
+                    <a class="text-light" href="https://www.facebook.com/gokmen.uygun.925" target="_blank"
+                        rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.instagram.com/uygunmakina_/" target="_blank"><i
+                            class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Close Top Nav -->
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html"><strong>Uygun
+                    Makina</strong></a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+                id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><strong>Ana Sayfa</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html"><strong>Hakkımızda</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="products.html"><strong>Ürünler</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html"><strong>İletişim</strong></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Close Header -->
+
+    <!-- Modal -->
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="w-100 pt-1 mb-5 text-right">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                    <button type="submit" class="input-group-text bg-success text-light">
+                        <i class="fa fa-fw fa-search text-white"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Close Modal -->
+    <!-- Start Content -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-3">
+
+                <div class="sidebar-card">
+                    <h1 class="h4 pb-4 font-weight-bold">Kategoriler</h1>
+                    <ul class="category-list">
+                        <li class="category-item">
+                            <div class="category-link-container d-flex align-items-center justify-content-between">
+                                <a class="category-link collapsed" href="used-machines.html">
+                                    <span>İkinci El Makinalar</span>
+                                </a>
+                                <i class="fa fa-chevron-down me-3" data-bs-toggle="collapse"
+                                    data-bs-target="#collapsedSecondHand" style="cursor: pointer;"></i>
+                            </div>
+                            <ul class="collapse  sub-category-list list-unstyled" id="collapsedSecondHand">
+                                <li><a class="sub-category-link" href="used-lathes.html">Torna</a></li>
+                                <li><a class="sub-category-link" href="used-milling.html">Freze</a></li>
+                                <li><a class="sub-category-link" href="used-cnc.html">CNC</a></li>
+                                <li><a class="sub-category-link" href="used-laser.html">Lazer Kesim</a></li>
+                                <li><a class="sub-category-link" href="used-press-brake.html">Akbant & Makas</a></li>
+                                <li><a class="sub-category-link" href="used-welding.html">Kaynak Makinası</a></li>
+                                <li><a class="sub-category-link" href="used-drills.html">Matkap</a></li>
+                                <li><a class="sub-category-link" href="used-presses.html">Pres</a></li>
+                                <li><a class="sub-category-link" href="used-tapping.html">Kılavuz Çekme</a></li>
+                                <li><a class="sub-category-link" href="used-saws.html">Testere</a></li>
+                                <li><a class="sub-category-link" href="used-pipe-bending.html">Boru-Profil Bükme</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="category-item">
+                            <div class="category-link-container d-flex align-items-center justify-content-between">
+                                <a class="category-link active" href="new-machines.html">
+                                    <span>Sıfır Makinalar</span>
+                                </a>
+                                <i class="fa fa-chevron-down me-3" data-bs-toggle="collapse"
+                                    data-bs-target="#collapsedNew" style="cursor: pointer;"></i>
+                            </div>
+                            <ul class="collapse show sub-category-list list-unstyled" id="collapsedNew">
+                                <li><a class="sub-category-link" href="new-cnc.html">CNC</a></li>
+                                <li><a class="sub-category-link" href="new-lathes.html">Torna</a></li>
+                                <li><a class="sub-category-link" href="new-milling.html">Freze</a></li>
+                                <li><a class="sub-category-link" href="new-presses.html">Pres</a></li>
+                                <li><a class="sub-category-link" href="new-drills.html">Matkap</a></li>
+                                <li><a class="sub-category-link" href="new-tapping.html">Kılavuz Çekme</a></li>
+                                <li><a class="sub-category-link" href="new-compressors.html">Kompresör</a></li>
+                                <li><a class="sub-category-link" href="new-saws.html">Testere</a></li>
+                                <li><a class="sub-category-link" href="new-welding.html">Kaynak Makinası</a></li>
+                                <li><a class="sub-category-link" href="new-pipe-bending.html">Boru-Profil Bükme</a></li>
+                            </ul>
+                        </li>
+                        <li class="category-item">
+                            <div class="category-link-container d-flex align-items-center justify-content-between">
+                                <a class="category-link collapsed" href="other-products.html">
+                                    <span>Diğer Ürünler</span>
+                                </a>
+                                <i class="fa fa-chevron-down me-3" data-bs-toggle="collapse"
+                                    data-bs-target="#collapsedOther" style="cursor: pointer;"></i>
+                            </div>
+                            <ul class="collapse  sub-category-list list-unstyled" id="collapsedOther">
+                                <li><a class="sub-category-link" href="other-machinery.html">Makina Yedek Parça</a></li>
+                                <li><a class="sub-category-link" href="other-hardware.html">Hırdavat</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-lg-9">
+
+                <div class="shop-toolbar">
+                    <div class="toolbar-left">
+                        <span class="text-muted">Kategoriye ait 1 sonuç listeleniyor</span>
+                    </div>
+                    <div class="toolbar-right">
+                        <select>
+                            <option>Sıralama: Öne Çıkanlar</option>
+                            <option>A-Z</option>
+                            <option>Z-A</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="premium-product-card">
+                            <div class="product-img-container">
+                                <span class="product-badge">Sıfır</span>
+                                <img class="product-img img-fluid" src="assets/img/tükendi.jpg" alt="Şu Anda Elimizde
+                                        Mevcut Değil">
+                            </div>
+                            <div class="product-info">
+                                <span class="product-cat">Ürün Detayı</span>
+                                <a href="products.html" class="product-title">Şu Anda Elimizde
+                                    Mevcut Değil</a>
+                                <a href="products.html" class="btn-premium">
+                                    <span>İncele</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div div="row">
+                    <ul class="pagination pagination-lg justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#"
+                                tabindex="-1">1</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Content -->
+    <!-- Start Footer -->
+    <footer id="tempaltemo_footer">
+        <style>
+            #tempaltemo_footer {
+                background: #0a0a0a;
+                position: relative;
+            }
+
+            #tempaltemo_footer::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, #28a745 0%, #20c997 50%, #28a745 100%);
+            }
+
+            .footer-content {
+                padding: 60px 0 40px;
+            }
+
+            .footer-logo {
+                font-size: 2rem;
+                font-weight: 800;
+                background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
+
+            .footer-description {
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 0.95rem;
+                line-height: 1.8;
+                margin-bottom: 25px;
+            }
+
+            .footer-title {
+                color: white;
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin-bottom: 25px;
+                position: relative;
+                padding-bottom: 12px;
+            }
+
+            .footer-title::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 40px;
+                height: 3px;
+                background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+                border-radius: 2px;
+            }
+
+            .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .footer-links li {
+                margin-bottom: 12px;
+            }
+
+            .footer-links a {
+                color: rgba(255, 255, 255, 0.7);
+                text-decoration: none;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .footer-links a:hover {
+                color: #28a745;
+                transform: translateX(5px);
+            }
+
+            .footer-contact-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 15px;
+                margin-bottom: 20px;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            .footer-contact-item i {
+                color: #28a745;
+                font-size: 1.1rem;
+                margin-top: 3px;
+            }
+
+            .footer-contact-item a {
+                color: rgba(255, 255, 255, 0.7);
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .footer-contact-item a:hover {
+                color: #28a745;
+            }
+
+            .footer-social {
+                display: flex;
+                gap: 15px;
+                margin-top: 25px;
+            }
+
+            .footer-social a {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .footer-social a:hover {
+                background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+                border-color: transparent;
+                transform: translateY(-5px);
+                color: white;
+            }
+
+            .footer-social a:hover i {
+                color: white !important;
+            }
+
+            .footer-bottom {
+                background: #000;
+                padding: 20px 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .footer-bottom p {
+                color: rgba(255, 255, 255, 0.6);
+                margin: 0;
+                font-size: 0.9rem;
+            }
+
+            .footer-bottom a {
+                color: #28a745;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .footer-bottom a:hover {
+                color: #20c997;
+            }
+        </style>
+
+        <div class="container footer-content">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <h2 class="footer-logo">Uygun Makina</h2>
+                    <p class="footer-description">
+                        15 yılı aşkın tecrübemizle Kocaeli ve çevresinde makina sektörünün güvenilir adresi olmaya devam
+                        ediyoruz.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/gokmen.uygun.925" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/uygunmakina_/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/905334558841" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <h3 class="footer-title">Hızlı Linkler</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Ana Sayfa</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> Hakkımızda</a></li>
+                        <li><a href="products.html"><i class="fas fa-chevron-right"></i> Ürünlerimiz</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h3 class="footer-title">Hizmetlerimiz</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Makina Alım</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Makina Satım</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Türkiye Teslimat</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Teknik Destek</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="footer-title">İletişim</h3>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>İzmit Sanayi Sitesi 9. Cadde, 302. Block, Kocaeli/İzmit</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <a href="tel:+905334558841">+90 (533) 455 88 41</a><br>
+                            <a href="tel:+905309966641">+90 (530) 996 66 41</a>
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:Kocaelimakinasanayi@gmail.com">Kocaelimakinasanayi@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p>© 2026 Uygun Makina | Tüm telif hakları saklıdır. | Designed by <a
+                                href="https://www.linkedin.com/in/deryacar/" target="_blank">Derya Acar</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- End Script -->
+</body>
+
+</html>
